@@ -1,8 +1,20 @@
 import express from "express";
 const router = express.Router()
-import { findUrlAndSend, ShortUrlandStore } from '../controllers/ShortnerController.js'
+import { forwardToOriginalUrl, ShortUrlandStore, getAllUrls, } from '../controllers/ShortnerController.js'
 
-router.route('/short').post(ShortUrlandStore)
-router.route('/go').post(findUrlAndSend)
+router.get('/', (req, res) => {
+  res.send({
+    name: 'Yurl',
+    version: '1.0.0',
+    description: 'URL Shortner',
+    time: `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+  })
+})
+
+router.get('/short', ShortUrlandStore)
+
+router.get('/:url', forwardToOriginalUrl)
+
+router.get('/all', getAllUrls)
 
 export default router

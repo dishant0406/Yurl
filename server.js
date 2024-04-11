@@ -16,7 +16,7 @@ connectDB();
 app.use(json());
 
 //define routes
-app.use('/api', shortnerRoute)
+app.use('/', shortnerRoute)
 
 //port
 const PORT = process.env.PORT || 3000;
